@@ -1,4 +1,4 @@
-# Simple REST API locally on a Linux server using Python with the Flask Framework
+# Simple REST API locally on a Linux server using Python with the Flask Framework (Dev)
 
 ## Prerequisites:
 1. Linux server (local or remote).
@@ -68,10 +68,15 @@ Start the Flask API server by running:
 python3 app.py
 ```
 By default, Flask will start the server on port 5000.
+Ensure port 5000 is open in your firewall settings
 
-6. Test Your API
+```bash
+sudo ufw allow 5000
+```
 
-a) Test the Root Endpoint
+### Test the API
+
+**a) Test the Root Endpoint** 
 Open your browser or use curl:
 
 ```bash
@@ -83,7 +88,7 @@ Expected Output:
 {"message": "Welcome to my API!"}
 ```
 
-b) Test the GET Endpoint with Query Parameters
+**b) Test the GET Endpoint with Query Parameters**
 
 ```bash
 curl "http://127.0.0.1:5000/api/greet?name=John"
@@ -95,7 +100,7 @@ Expected Output:
 {"greeting": "Hello, John!"}
 ```
 
-c) Test the POST 
+**c) Test the POST** 
 
 Use curl to send JSON data:
 
@@ -108,3 +113,15 @@ Expected Output:
 ```json
 {"received_data": {"key": "value"}}
 ```
+
+Stop the Server
+To stop the server, press Ctrl + C.
+
+---
+
+
+# Promote Flask API to Production using Gunicorn, Nginx and Docker (Production WSGI Server)
+
+
+
+
