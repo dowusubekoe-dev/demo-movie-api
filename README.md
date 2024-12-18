@@ -58,7 +58,7 @@ def echo():
 
 # Run the Flask app
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='127.0.0.1', port=5002, debug=True)
 ```
 
 5. Run the API Server
@@ -67,11 +67,11 @@ Start the Flask API server by running:
 ```bash
 python3 app.py
 ```
-By default, Flask will start the server on port 5000.
+By default, Flask will start the server on port 5000. But for this app I used port 5002 because I had a docker image also running on port 5000
 Ensure port 5000 is open in your firewall settings
 
 ```bash
-sudo ufw allow 5000
+sudo ufw allow 5002
 ```
 
 ### Test the API
@@ -80,7 +80,7 @@ sudo ufw allow 5000
 Open your browser or use curl:
 
 ```bash
-curl http://127.0.0.1:5000/
+curl http://127.0.0.1:5002/
 ```
 Expected Output:
 
@@ -91,7 +91,7 @@ Expected Output:
 **b) Test the GET Endpoint with Query Parameters**
 
 ```bash
-curl "http://127.0.0.1:5000/api/greet?name=John"
+curl "http://127.0.0.1:5002/api/greet?name=John"
 ```
 
 Expected Output:
@@ -105,7 +105,7 @@ Expected Output:
 Use curl to send JSON data:
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{"key": "value"}' http://127.0.0.1:5000/api/echo
+curl -X POST -H "Content-Type: application/json" -d '{"key": "value"}' http://127.0.0.1:5002/api/echo
 ```
 
 Expected Output:
