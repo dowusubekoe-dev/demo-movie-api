@@ -117,10 +117,98 @@ Expected Output:
 Stop the Server
 To stop the server, press Ctrl + C.
 
+This section helped to get a better understanding of how set up APIs locally and run both POST and GET requests.
+
 ---
 
 
 # Promote Flask API to Production using Gunicorn, Nginx and Docker (Production WSGI Server)
+
+For this section, I will be looking into how to store the movie data to a database and modify the **app.py** to add **routes** for *adding*, *viewing*, and *updating* movie data.
+
+## Plan Structure of Movie Data API
+
+Structure of the API will need the following information
+
+- Movie title
+- Genre
+- Release year
+- Cast and crew
+- Plot synopsis
+- Ratings
+- Poster image URL
+
+## Set Up Database
+
+Use a database (like SQLite, PostgreSQL, or MySQL) to store your movie data. For simplicity, you can start with SQLite since it requires minimal setup.
+
+1. Install SQLite
+
+```bash
+sudo apt-get install sqlite3
+```
+2. Create a Database Schema called (e.g movie_data.db)
+
+```bash
+sqlite3 movie_data.db
+```
+3. Create a basic table for the movie_data.db database
+
+```sql
+CREATE TABLE movies (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    genre TEXT NOT NULL,
+    year INTEGER,
+    plot TEXT,
+    rating REAL,
+    poster_url TEXT
+);
+```
+
+## Import Flask, Python and SQLite Dependencies
+
+Since I will using using Python in buidling this app, I have to import Flask, jsonify, sqlit, and request from Flask.
+
+```python
+from flask import Flask, jsonify, request
+import sqlite3
+
+app = Flask(__name__)
+```
+
+### Test the API
+
+To access the data from the movie database, **routes** will be used and to test if the app works and make it accessible to other devices on the same network, a route to display a simple message is used.
+
+```python
+@app.route("/")
+def home():
+    return jsonify({"message": "Welcome to the Flask API!"})
+```
+By default, Flask binds to 127.0.0.1 (localhost), which means it only listens for requests from the same machine. To allow external access, ensure the host is set to 0.0.0.0 in your app.run():
+
+```python
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5002, debug=True)
+```
+This change makes Flask listen on all network interfaces, including the machine that the app is running on. E.g a linux server.
+
+Final code for testing the app.
+
+```python
+from flask import Flask, jsonify, request
+import sqlite3
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return jsonify({"message": "Welcome to the Flask API!"})
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5002, debug=True)
+```
 
 
 
