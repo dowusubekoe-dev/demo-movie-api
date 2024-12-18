@@ -374,6 +374,78 @@ In this section, I configured Flask to run with Gunicorn, set up Nginx as a reve
 ---
 
 
+## Reload Systemd, Restart Service
+
+Once the change is made:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart flask_api
+```
+
+Check the status of the service:
+
+```bash
+sudo systemctl status flask_api
+```
+---
+
+
+## Test Endpoint in Postman
+
+Assuming your Nginx is reverse-proxying requests to the Gunicorn API, test it via your server's IP address or domain name.
+
+**a) Test the Root Endpoint**
+Run the following command
+
+```bash
+curl http://<your_server_ip_or_domain>/ # You should see the response: {"message": "Welcome to my API!"}
+```
+
+**b) Test the GET Endpoint with Query Parameters**
+
+```bash
+curl "http://<your_server_ip_or_domain>:<port>/api/greet?name=John" # {"greeting": "Hello, John!"}
+```
+
+**c) Test the POST Endpoint**
+Send JSON data to the API
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"key": "value"}' http://<your_server_ip_or_domain>/api/echo # {"received_data": {"key": "value"}}
+```
+
+### Test with Postman
+
+1. Download and open Postman (or use its web version).
+2. Create a new request:
+    - Method: GET or POST
+    - URL: http://<your_server_ip_or_domain>/api/greet or any other endpoint.
+3. For the POST endpoint, go to Body > raw and set the type to JSON, then provide input:
+
+```json
+{"key": "value"}
+```
+4. Send the request and view the response
+
+### Test with a Browser
+
+1. For GET endpoints like / or /api/greet, open the browser and enter
+
+```bash
+http://<your_server_ip_or_domain>/
+```
+
+2. For /api/greet with query parameters
+
+```perl
+http://<your_server_ip_or_domain>/api/greet?name=John
+```
+
+---
+
+
+
 
 
 
