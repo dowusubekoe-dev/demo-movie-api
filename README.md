@@ -68,7 +68,7 @@ Start the Flask API server by running:
 python3 app.py
 ```
 By default, Flask will start the server on port 5000. But for this app I used port 5002 because I had a docker image also running on port 5000
-Ensure port 5000 is open in your firewall settings
+Ensure port 5002 is open in your firewall settings.
 
 ```bash
 sudo ufw allow 5002
@@ -100,7 +100,7 @@ Expected Output:
 {"greeting": "Hello, John!"}
 ```
 
-**c) Test the POST** 
+**c) Test the POST Locally** 
 
 Use curl to send JSON data:
 
@@ -116,66 +116,6 @@ Expected Output:
 
 Stop the Server
 To stop the server, press Ctrl + C.
-
-This section helped to get a better understanding of how set up APIs locally and run both POST and GET requests.
-
----
-
-
-# Promote Flask API to Production using Gunicorn, Nginx and Docker (Production WSGI Server)
-
-For this section, I will be looking into how to store the movie data to a database and modify the **app.py** to add **routes** for *adding*, *viewing*, and *updating* movie data.
-
-## Plan Structure of Movie Data API
-
-Structure of the API will need the following information
-
-- Movie title
-- Genre
-- Release year
-- Cast and crew
-- Plot synopsis
-- Ratings
-- Poster image URL
-
-## Set Up Database
-
-Use a database (like SQLite, PostgreSQL, or MySQL) to store your movie data. For simplicity, you can start with SQLite since it requires minimal setup.
-
-1. Install SQLite
-
-```bash
-sudo apt-get install sqlite3
-```
-2. Create a Database Schema called (e.g movie_data.db)
-
-```bash
-sqlite3 movie_data.db
-```
-3. Create a basic table for the movie_data.db database
-
-```sql
-CREATE TABLE movies (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT NOT NULL,
-    genre TEXT NOT NULL,
-    year INTEGER,
-    plot TEXT,
-    rating REAL,
-    poster_url TEXT
-);
-```
-
-## Import Flask, Python and SQLite Dependencies
-
-Since I will using using Python in buidling this app, I have to import Flask, jsonify, sqlit, and request from Flask.
-
-```python
-from flask import Flask, jsonify, request
-import sqlite3
-
-app = Flask(__name__)
-```
 
 ### Test the API
 
@@ -194,7 +134,8 @@ if __name__ == "__main__":
 ```
 This change makes Flask listen on all network interfaces, including the machine that the app is running on. E.g a linux server.
 
-Final code for testing the app.
+
+#### Final code for testing the app.
 
 ```python
 from flask import Flask, jsonify, request
@@ -209,6 +150,25 @@ def home():
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5002, debug=True)
 ```
+
+To set the api, run
+
+```bash
+python3 app.py
+```
+Click on the link by using Ctrl + Click or copy URL and paste in the browser.
+
+Expected output:
+
+![](./images/test-api.PNG)
+
+
+This section helped to get a better understanding of how set up APIs locally or externally and run the POST and GET requests or use **curl** command.
+
+---
+
+
+
 
 
 
