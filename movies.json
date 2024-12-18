@@ -1,0 +1,194 @@
+[
+    {
+        "title": "The Dark Knight",
+        "genre": "Action",
+        "year": 2008,
+        "plot": "Batman faces the Joker, a criminal mastermind.",
+        "rating": 9.0,
+        "poster_url": "https://example.com/dark-knight.jpg"
+    },
+    {
+        "title": "Interstellar",
+        "genre": "Sci-Fi",
+        "year": 2014,
+        "plot": "A team of astronauts explores a wormhole in search of a new home for humanity.",
+        "rating": 8.6,
+        "poster_url": "https://example.com/interstellar.jpg"
+    },
+    {
+        "title": "The Shawshank Redemption",
+        "genre": "Drama",
+        "year": 1994,
+        "plot": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+        "rating": 9.3,
+        "poster_url": "https://example.com/shawshank.jpg"
+    },
+    {
+        "title": "The Godfather",
+        "genre": "Crime",
+        "year": 1972,
+        "plot": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+        "rating": 9.2,
+        "poster_url": "https://example.com/godfather.jpg"
+    },
+    {
+        "title": "The Dark Knight",
+        "genre": "Action",
+        "year": 2008,
+        "plot": "When the menace known as the Joker emerges, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+        "rating": 9.0,
+        "poster_url": "https://example.com/darkknight.jpg"
+    },
+    {
+        "title": "Pulp Fiction",
+        "genre": "Crime",
+        "year": 1994,
+        "plot": "The lives of two mob hitmen, a boxer, a gangster's wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+        "rating": 8.9,
+        "poster_url": "https://example.com/pulpfiction.jpg"
+    },
+    {
+        "title": "Forrest Gump",
+        "genre": "Drama",
+        "year": 1994,
+        "plot": "The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal, and other history unfold through the perspective of an Alabama man.",
+        "rating": 8.8,
+        "poster_url": "https://example.com/forrestgump.jpg"
+    },
+    {
+        "title": "Inception",
+        "genre": "Sci-Fi",
+        "year": 2010,
+        "plot": "A thief who steals corporate secrets through dream-sharing technology is tasked with planting an idea into the mind of a CEO.",
+        "rating": 8.8,
+        "poster_url": "https://example.com/inception.jpg"
+    },
+    {
+        "title": "Fight Club",
+        "genre": "Drama",
+        "year": 1999,
+        "plot": "An insomniac office worker and a devil-may-care soapmaker form an underground fight club that evolves into something much, much more.",
+        "rating": 8.8,
+        "poster_url": "https://example.com/fightclub.jpg"
+    },
+    {
+        "title": "The Matrix",
+        "genre": "Sci-Fi",
+        "year": 1999,
+        "plot": "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
+        "rating": 8.7,
+        "poster_url": "https://example.com/matrix.jpg"
+    },
+    {
+        "title": "Goodfellas",
+        "genre": "Crime",
+        "year": 1990,
+        "plot": "The story of Henry Hill and his life in the mob, covering his relationship with his partners and his involvement in organized crime.",
+        "rating": 8.7,
+        "poster_url": "https://example.com/goodfellas.jpg"
+    },
+    {
+        "title": "The Silence of the Lambs",
+        "genre": "Thriller",
+        "year": 1991,
+        "plot": "A young F.B.I. cadet must receive the help of an incarcerated cannibal killer to catch another serial killer.",
+        "rating": 8.6,
+        "poster_url": "https://example.com/silenceofthelambs.jpg"
+    },
+    {
+        "title": "Se7en",
+        "genre": "Crime",
+        "year": 1995,
+        "plot": "Two detectives, a rookie and a veteran, hunt a serial killer who uses the seven deadly sins as his motives.",
+        "rating": 8.6,
+        "poster_url": "https://example.com/se7en.jpg"
+    },
+    {
+        "title": "Interstellar",
+        "genre": "Sci-Fi",
+        "year": 2014,
+        "plot": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+        "rating": 8.6,
+        "poster_url": "https://example.com/interstellar.jpg"
+    },
+    {
+        "title": "The Green Mile",
+        "genre": "Drama",
+        "year": 1999,
+        "plot": "The lives of guards on Death Row are affected by one of their charges: a black man accused of child murder and rape, who has a mysterious gift.",
+        "rating": 8.6,
+        "poster_url": "https://example.com/greenmile.jpg"
+    },
+    {
+        "title": "The Lion King",
+        "genre": "Animation",
+        "year": 1994,
+        "plot": "A lion prince flees his kingdom only to learn the true meaning of responsibility and bravery.",
+        "rating": 8.5,
+        "poster_url": "https://example.com/lionking.jpg"
+    },
+    {
+        "title": "The Prestige",
+        "genre": "Mystery",
+        "year": 2006,
+        "plot": "After a tragic accident, two stage magicians engage in a battle to create the ultimate illusion while sacrificing everything they have.",
+        "rating": 8.5,
+        "poster_url": "https://example.com/prestige.jpg"
+    },
+    {
+        "title": "Gladiator",
+        "genre": "Action",
+        "year": 2000,
+        "plot": "A former Roman General seeks vengeance against the corrupt emperor who murdered his family and sent him into slavery.",
+        "rating": 8.5,
+        "poster_url": "https://example.com/gladiator.jpg"
+    },
+    {
+        "title": "Whiplash",
+        "genre": "Drama",
+        "year": 2014,
+        "plot": "A promising young drummer enrolls at a music conservatory where his dreams of greatness are mentored by an instructor who will stop at nothing.",
+        "rating": 8.5,
+        "poster_url": "https://example.com/whiplash.jpg"
+    },
+    {
+        "title": "The Departed",
+        "genre": "Crime",
+        "year": 2006,
+        "plot": "An undercover cop and a mole in the police attempt to identify each other while infiltrating an Irish gang in Boston.",
+        "rating": 8.5,
+        "poster_url": "https://example.com/departed.jpg"
+    },
+    {
+        "title": "Parasite",
+        "genre": "Thriller",
+        "year": 2019,
+        "plot": "Greed and class discrimination threaten the newly-formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.",
+        "rating": 8.5,
+        "poster_url": "https://example.com/parasite.jpg"
+    },
+    {
+        "title": "Joker",
+        "genre": "Crime",
+        "year": 2019,
+        "plot": "In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society, leading to his descent into madness.",
+        "rating": 8.4,
+        "poster_url": "https://example.com/joker.jpg"
+    },
+    {
+        "title": "The Social Network",
+        "genre": "Biography",
+        "year": 2010,
+        "plot": "The story of Facebook's founding and the legal battles that followed as a result.",
+        "rating": 7.7,
+        "poster_url": "https://example.com/socialnetwork.jpg"
+    },
+    {
+        "title": "Mad Max: Fury Road",
+        "genre": "Action",
+        "year": 2015,
+        "plot": "In a post-apocalyptic wasteland, a woman rebels against a tyrannical ruler and seeks her homeland.",
+        "rating": 8.1,
+        "poster_url": "https://example.com/madmaxfuryroad.jpg"
+    }
+]
