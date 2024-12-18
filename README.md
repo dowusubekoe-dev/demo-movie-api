@@ -300,5 +300,35 @@ sudo systemctl status flask_api
 ```
 ---
 
+## Dockerize the Flask API
+
+1. Create a Dockerfile
+In **your project directory**, create a **Dockerfile**
+
+```Dockerfile
+# Use official Python image
+FROM python:3.10
+
+# Set working directory
+WORKDIR /app
+
+# Copy project files
+COPY . /app
+
+# Install dependencies
+RUN pip install --no-cache-dir flask gunicorn
+
+# Expose the port Flask uses
+EXPOSE 5000
+
+# Run the API with Gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:5002", "app:app"]
+```
+2. Build the Docker Image
+Run the following command in **your project directory**
+
+```bash
+docker build -t flask_api .
+```
 
 
