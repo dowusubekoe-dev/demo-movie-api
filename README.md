@@ -209,6 +209,7 @@ Explanation:
 
 ---
 
+
 ## Set Up Nginx as a Reverse Proxy
 
 1. Install **Nginx**
@@ -253,6 +254,7 @@ sudo nginx -t  # Test Nginx configuration
 sudo systemctl restart nginx
 ```
 ---
+
 
 ## Run Flask App with Gunicorn as a Service
 
@@ -300,6 +302,7 @@ sudo systemctl status flask_api
 ```
 ---
 
+
 ## Dockerize the Flask API
 
 1. Create a Dockerfile
@@ -308,27 +311,70 @@ In **your project directory**, create a **Dockerfile**
 ```Dockerfile
 # Use official Python image
 FROM python:3.10
-
 # Set working directory
 WORKDIR /app
-
 # Copy project files
 COPY . /app
-
 # Install dependencies
 RUN pip install --no-cache-dir flask gunicorn
-
 # Expose the port Flask uses
 EXPOSE 5000
-
 # Run the API with Gunicorn
 CMD ["gunicorn", "--bind", "0.0.0.0:5002", "app:app"]
 ```
+
 2. Build the Docker Image
 Run the following command in **your project directory**
 
 ```bash
 docker build -t flask_api .
 ```
+
+3. Run the Docker Container
+Run the container to expose port 5002 or your the port of the app
+
+```bash
+docker run -d -p 5002:5002 flask_api
+```
+
+Test the API with;
+
+```bash
+curl http://127.0.0.1:5002/ # internally
+```
+OR
+
+```bash
+curl http://1xx.1xx.xx.xxx:5002/ # externally
+```
+
+---
+
+
+## Connect Dockerized API to Nginx
+
+For simplicity, I decided to run both **Nginx** and **Docker** on the same machine.
+
+1. Modify the Nginx configuration **(/etc/nginx/sites-available/flask_api)**
+
+```nginx
+location / {
+    proxy_pass http://127.0.0.1:5002;
+}
+```
+
+2. Restart Nginx
+
+```bash
+sudo systemctl restart nginx
+sudo systemctl status nginx
+```
+In this section, I configured Flask to run with Gunicorn, set up Nginx as a reverse proxy and containerized the API with Docker for portability.
+
+---
+
+
+
+
 
 
