@@ -68,3 +68,43 @@ Start the Flask API server by running:
 python3 app.py
 ```
 By default, Flask will start the server on port 5000.
+
+6. Test Your API
+
+a) Test the Root Endpoint
+Open your browser or use curl:
+
+```bash
+curl http://127.0.0.1:5000/
+```
+Expected Output:
+
+```json
+{"message": "Welcome to my API!"}
+```
+
+b) Test the GET Endpoint with Query Parameters
+
+```bash
+curl "http://127.0.0.1:5000/api/greet?name=John"
+```
+
+Expected Output:
+
+```json
+{"greeting": "Hello, John!"}
+```
+
+c) Test the POST 
+
+Use curl to send JSON data:
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"key": "value"}' http://127.0.0.1:5000/api/echo
+```
+
+Expected Output:
+
+```json
+{"received_data": {"key": "value"}}
+```
