@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir flask gunicorn
 EXPOSE 5000
 
 # Run the API with Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:5001", "app:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5002", "app:app"]
