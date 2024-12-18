@@ -508,7 +508,140 @@ def get_db_connection():
     return conn
 ```
 
+### Route to Fetch all Movie Data
+
+Create another route and function in app.py to pull movie data from the database.
+
+```python
+@app.route('/api/movies', methods=['GET'])
+def get_movies():
+    conn = get_db_connection()
+    movies = conn.execute('SELECT * FROM movies').fetchall()
+    conn.close()
+    return jsonify([dict(movie) for movie in movies])
+```
+
+### Request Movie Data by ID
+
+```python
+@app.route('/api/movies/<int:id>', methods=['GET'])
+def get_movie(id):
+    conn = get_db_connection()
+    movie = conn.execute('SELECT * FROM movies WHERE id = ?', (id,)).fetchone()
+    conn.close()
+    if movie is None:
+        return jsonify({"error": "Movie not found"}), 404
+    return jsonify(dict(movie))
+```
+
+### Add New Movie Data to SQLite Database
+
+```python
+@app.route('/api/movies', methods=['POST'])
+def add_movie():
+    data = request.get_json()
+    title = data['title']
+    genre = data['genre']
+    year = data.get('year', None)
+    plot = data.get('plot', None)
+    rating = data.get('rating', None)
+    poster_url = data.get('poster_url', None)
+
+    conn = get_db_connection()
+    conn.execute('INSERT INTO movies (title, genre, year, plot, rating, poster_url) VALUES (?, ?, ?, ?, ?, ?)',
+                 (title, genre, year, plot, rating, poster_url))
+    conn.commit()
+    conn.close()
+    return jsonify({"message": "Movie added successfully!"}), 201
+```
+
+### Update Existing Movie Details
+
+```python
+@app.route('/api/movies/<int:id>', methods=['PUT'])
+def update_movie(id):
+    data = request.get_json()
+    title = data['title']
+    genre = data['genre']
+    year = data.get('year', None)
+    plot = data.get('plot', None)
+    rating = data.get('rating', None)
+    poster_url = data.get('poster_url', None)
+
+    conn = get_db_connection()
+    conn.execute('UPDATE movies SET title = ?, genre = ?, year = ?, plot = ?, rating = ?, poster_url = ? WHERE id = ?',
+                 (title, genre, year, plot, rating, poster_url, id))
+    conn.commit()
+    conn.close()
+    return jsonify({"message": "Movie updated successfully!"})
+```
+
+### Delete Movie Data by ID
+
+```python
+@app.route('/api/movies/<int:id>', methods=['DELETE'])
+def delete_movie(id):
+    conn = get_db_connection()
+    conn.execute('DELETE FROM movies WHERE id = ?', (id,))
+    conn.commit()
+    conn.close()
+    return jsonify({"message": "Movie deleted successfully!"})
+```
+
+....
+
+
 ---
+
+
+## Test the Movie API
+
+1. **GET all movies:**
+
+```bash
+curl http://127.0.0.1:5002/api/movies
+```
+
+2. **GET a Movie by ID**
+
+```bash
+curl http://127.0.0.1:5002/api/movies/1
+```
+
+3. **POST a new moview**
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{
+  "title": "Inception",
+  "genre": "Sci-Fi",
+  "year": 2010,
+  "plot": "A mind-bending thriller.",
+  "rating": 8.8,
+  "poster_url": "https://link_to_poster.com"
+}' http://127.0.0.1:5002/api/movies
+```
+
+4. **PUT to update a movie**
+
+```bash
+curl -X PUT -H "Content-Type: application/json" -d '{
+  "title": "Inception",
+  "genre": "Sci-Fi",
+  "year": 2010,
+  "plot": "A new plot description.",
+  "rating": 9.0,
+  "poster_url": "https://new_link_to_poster.com"
+}' http://127.0.0.1:5000/api/movies/1
+```
+5. **DELETE a movie**
+
+```bash
+curl -X DELETE http://127.0.0.1:5002/api/movies/1
+```
+
+---
+
+
 
 
 
