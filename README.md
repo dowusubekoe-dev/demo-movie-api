@@ -445,6 +445,72 @@ http://<your_server_ip_or_domain>/api/greet?name=John
 ---
 
 
+## Plan Structure of Movie Data API
+
+Structure of the API will need the following information
+
+- Movie title
+- Genre
+- Release year
+- Cast and crew
+- Plot synopsis
+- Ratings
+- Poster image URL
+
+### Import Flask, Python and SQLite Dependencies
+
+Since I will be using using Python in buidling this app, I have to import Flask, jsonify, sqlit, and request from Flask.
+
+```python
+from flask import Flask, jsonify, request
+import sqlite3
+
+app = Flask(__name__)
+```
+
+### Set Up Database
+
+Use a database (like SQLite, PostgreSQL, or MySQL) to store your movie data. For simplicity, you can start with SQLite since it requires minimal setup.
+
+1. Install SQLite
+
+```bash
+sudo apt-get install sqlite3
+```
+2. Create a Database Schema called (e.g movie_data.db)
+
+```bash
+sqlite3 movie_data.db
+```
+3. Create a basic table for the movie_data.db database
+
+```sql
+CREATE TABLE movies (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    genre TEXT NOT NULL,
+    year INTEGER,
+    plot TEXT,
+    rating REAL,
+    poster_url TEXT
+);
+```
+
+### Connection to the SQLite Database
+
+Create a function to connet to sqlite database.
+
+```python
+# Connect to SQLite DB
+def get_db_connection():
+    conn = sqlite3.connect('movie_data.db')
+    conn.row_factory = sqlite3.Row
+    return conn
+```
+
+---
+
+
 
 
 
