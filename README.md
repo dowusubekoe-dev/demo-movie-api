@@ -150,25 +150,153 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5002, debug=True)
 ```
 
-To set the api, run
+1. To set the api internally, run
 
 ```bash
 python3 app.py
 ```
-Click on the link by using Ctrl + Click or copy URL and paste in the browser.
+Click on the link by using Ctrl + Click or copy URL and paste in the browser. test root endpoint using this command
 
 Expected output:
 
 ![](./images/test-api.PNG)
 
 
+2. For externnal testing of the api, using **curl**
+
+```bash
+curl http://127.0.0.1:5002/
+```
+Expected output:
+
+```bash
+$ curl http://19x.xxx.xxx.xxx:5002
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100    45  100    45    0     0   2502      0 --:--:-- --:--:-- --:--:--  2647
+{
+  "message": "Welcome to the Flask API!"
+}
+```
 This section helped to get a better understanding of how set up APIs locally or externally and run the POST and GET requests or use **curl** command.
 
 ---
 
-# Promote API app to Production using Flask API, SQLite, Gunicorn, Nginx and Docker (Production WSGI Server)
+#  Prepare Flask API for Production using SQLite, Gunicorn, Nginx and Docker
 
 For this section, I will be looking into how to store the movie data to a database and modify the **app.py** to add **routes** for *adding*, *viewing*, and *updating* movie data.
+
+
+## Run Flask API with Gunicorn (Production WSGI Server)
+
+1. Install **Gunicorn**
+First, install Gunicorn using pip3
+
+```bash
+pip3 install gunicorn
+```
+
+2. Run Gunicorn with Flask
+Navigate to your project directory (where app.py is located) and run
+
+```bash
+gunicorn --bind 0.0.0.0:5002 app:app
+```
+Explanation:
+- app before : is the filename (app.py).
+- app after : is the Flask instance created in the file.
+
+
+## Set Up Nginx as a Reverse Proxy
+
+1. Install **Nginx**
+Install Nginx on the Linux server
+
+```bash
+sudo apt update
+sudo apt install nginx -y
+```
+
+2. Configure Nginx
+Create a new Nginx configuration file for your Flask app
+
+```bash
+sudo nano /etc/nginx/sites-available/flask_api
+```
+Add the following configuration
+
+```nginx
+server {
+    listen 80;
+    server_name your_server_ip_or_domain;
+
+    location / {
+        proxy_pass http://127.0.0.1:5002;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+Replace:
+- ****your_server_ip_or_domain** with the linux server ip address
+
+3. Enable the Configuration
+Run the following commands
+
+```bash
+sudo ln -s /etc/nginx/sites-available/flask_api /etc/nginx/sites-enabled/
+sudo nginx -t  # Test Nginx configuration
+sudo systemctl restart nginx
+```
+
+## Run Flask App with Gunicorn as a Service
+
+To keep your Gunicorn app running, create a systemd service:
+
+1. Create the service file
+
+```bash
+sudo nano /etc/systemd/system/flask_api.service
+```
+
+2. Add the following configuration
+
+```ini
+[Unit]
+Description=Gunicorn instance to serve Flask API
+After=network.target
+
+[Service]
+User=<your_linux_username>
+Group=www-data
+WorkingDirectory=/path/to/your/project
+Environment="PATH=/usr/bin"
+ExecStart=/usr/local/bin/gunicorn --workers 3 --bind unix:flask_api.sock -m 007 app:app
+
+[Install]
+WantedBy=multi-user.target
+```
+Replace:
+- **your_linux_username** with your Linux user.
+- **/path/to/your/project** with the absolute path to your Flask project.
+
+3. Start and enable the service
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl start flask_api
+sudo systemctl enable flask_api
+```
+
+4. Check the service status
+
+```bash
+sudo systemctl status flask_api
+```
+
+
 
 ## Plan Structure of Movie Data API
 
