@@ -642,8 +642,100 @@ curl -X DELETE http://127.0.0.1:5002/api/movies/1
 ---
 
 
+## Load Movie Data from a JSON file into Database
+
+To load more movie data from a JSON file and add it to your database, you'll need to:
+
+1. Prepare the JSON File: Make sure your JSON file contains movie data in a format that matches your database schema.
+2. Write a script to load data into the database.
 
 
+### Prepare the JSON File
+
+- Create a JSON file called movies.json in format below
+
+```json
+[
+    {
+        "title": "The Dark Knight",
+        "genre": "Action",
+        "year": 2008,
+        "plot": "Batman faces the Joker, a criminal mastermind.",
+        "rating": 9.0,
+        "poster_url": "https://example.com/dark-knight.jpg"
+    },
+    {
+        "title": "Interstellar",
+        "genre": "Sci-Fi",
+        "year": 2014,
+        "plot": "A team of astronauts explores a wormhole in search of a new home for humanity.",
+        "rating": 8.6,
+        "poster_url": "https://example.com/interstellar.jpg"
+    }
+]
+```
+
+
+### Write a Script to Load Movies into the Database
+
+Create a Python script (load_movies.py) to load the movie data from movies.json into your SQLite database.
+
+```python
+import sqlite3
+import json
+
+# Connect to SQLite DB
+def get_db_connection():
+    conn = sqlite3.connect('movie_data.db')
+    conn.row_factory = sqlite3.Row
+    return conn
+
+# Load movies from JSON file
+def load_movies_from_json(file_path):
+    with open(file_path, 'r') as file:
+        movies = json.load(file)
+    return movies
+
+# Insert movies into the database
+def insert_movies(movies):
+    conn = get_db_connection()
+    for movie in movies:
+        conn.execute('''
+            INSERT INTO movies (title, genre, year, plot, rating, poster_url)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ''', (movie['title'], movie['genre'], movie['year'], movie['plot'], movie['rating'], movie['poster_url']))
+    conn.commit()
+    conn.close()
+
+# Main function to load the movies
+def main():
+    movies = load_movies_from_json('movies.json')
+    insert_movies(movies)
+    print(f'{len(movies)} movies loaded successfully!')
+
+if __name__ == '__main__':
+    main()
+```
+
+### Run script and verify data
+
+After saving the script as load_movies.py, run it to load the movies from the movies.json file into your database:
+
+```bash
+python3 load_movies.py
+```
+
+You can check the database to ensure the movies have been added correctly by running:
+
+```bash
+sqlite3 movie_data.db
+```
+
+Then, run the query to view the movies:
+
+```sql
+SELECT * FROM movies;
+```
 
 
 
