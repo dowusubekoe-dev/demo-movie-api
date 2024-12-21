@@ -3,6 +3,10 @@ import sqlite3
 
 app = Flask(__name__)
 
+@app.route("/")
+def home():
+    return jsonify({"message": "Welcome to the Flask API!"})
+
 # Function to connect to the SQLite database
 def get_db_connection():
     conn = sqlite3.connect('movie_data.db')
